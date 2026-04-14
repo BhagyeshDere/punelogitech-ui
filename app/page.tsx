@@ -5,26 +5,50 @@ import FamilySection from "@/components/home/FamilySection";
 import ProductShowcase from "@/components/home/ProductShowcase";
 import IndustriesSection from "@/components/home/IndustriesSection";
 import StatsSection from "@/components/home/StatsSection";
-import CTASection from "@/components/home/CTASection"; // ✅ ADD THIS
+import CTASection from "@/components/home/CTASection";
 
 export default function Home() {
   return (
-    <>
+    <main className="overflow-x-hidden">
+
+      {/* 🔥 HERO */}
       <Hero />
 
-      <VideoSection />
+      {/* 🔥 VIDEO */}
+      <section className="relative z-10">
+        <VideoSection />
+      </section>
 
-      <FeaturesSection />
+      {/* 🔥 FEATURES */}
+      <section className="relative z-10">
+        <FeaturesSection />
+      </section>
 
-      <FamilySection />
+      {/* 🔥 FAMILY */}
+      <section className="relative z-10">
+        <FamilySection />
+      </section>
 
-      <ProductShowcase />
+      {/* 🔥 PRODUCTS */}
+      <section className="relative z-10">
+        <ProductShowcase />
+      </section>
 
-      <IndustriesSection />
+      {/* 🔥 INDUSTRIES */}
+      <section className="relative z-10">
+        <IndustriesSection />
+      </section>
 
-      <StatsSection />
+      {/* 🔥 STATS */}
+      <section className="relative z-10">
+        <StatsSection />
+      </section>
 
-      <CTASection /> {/* 🔥 FINAL CTA SECTION */}
-    </>
+      {/* 🔥 FINAL CTA */}
+      <section className="relative z-10 pb-10">
+        <CTASection />
+      </section>
+
+    </main>
   );
 }

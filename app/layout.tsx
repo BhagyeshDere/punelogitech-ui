@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+/* 🔥 FONTS */
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,11 +22,21 @@ const bebas = Bebas_Neue({
   variable: "--font-bebas",
 });
 
+/* 🔥 SEO METADATA */
 export const metadata: Metadata = {
-  title: "Pune Logitech",
-  description: "Industrial Crane Solutions",
+  title: "Pune Logitech | Crane & Equipment Rental",
+  description:
+    "Pune Logitech provides advanced crane rental, lifting equipment, and industrial solutions for construction and logistics.",
+  keywords: [
+    "crane rental Pune",
+    "boom lift",
+    "hydra crane",
+    "industrial equipment",
+    "material handling",
+  ],
 };
 
+/* 🔥 ROOT LAYOUT */
 export default function RootLayout({
   children,
 }: {
@@ -34,19 +45,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bebas.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bebas.variable} h-full scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-white text-black">
-        
-        {/* ✅ Navbar */}
+      <body className="min-h-screen flex flex-col bg-white text-black antialiased">
+
+        {/* 🔥 NAVBAR */}
         <Navbar />
 
-        {/* ✅ Main Content */}
-        <main className="flex-1 pt-24">
+        {/* 🔥 MAIN CONTENT */}
+        <main className="flex-1 pt-20 md:pt-24">
           {children}
         </main>
 
-        {/* ✅ Footer */}
+        {/* 🔥 FOOTER */}
         <Footer />
 
       </body>

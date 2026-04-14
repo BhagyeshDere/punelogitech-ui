@@ -1,74 +1,105 @@
 "use client";
 
+import { motion } from "framer-motion";
+
+const industries = [
+  "Construction & Infrastructure Projects",
+  "Industrial Plant & Machinery Handling",
+  "Warehousing & Logistics Operations",
+  "Oil, Gas & Energy Sector",
+  "Factory Maintenance & Installation",
+  "Heavy Equipment Transportation",
+  "Custom Industrial Solutions",
+];
+
 export default function IndustriesSection() {
   return (
-    <section className="py-32 bg-[#F3F3F3]">
+    <section className="py-20 bg-[#F8F8F8] relative overflow-hidden">
+      
+      {/* 🧩 BACKGROUND ACCENT */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-orange-500/[0.02] -skew-x-12 translate-x-20 pointer-events-none" />
 
-      {/* 🔥 CENTER CARD */}
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-[32px] overflow-hidden bg-[#050505] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)]"
+        >
+          {/* 🟠 ORANGE GRADIENT LAYER - Reduced Intensity */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/15 blur-[120px] rounded-full -mr-48 -mt-48" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-orange-900/10 blur-[100px] rounded-full -ml-24 -mb-24" />
+          
+          {/* 🏁 TEXTURE */}
+          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
 
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative px-8 md:px-14 py-16 grid lg:grid-cols-12 gap-12 items-center">
 
-          {/* 🔥 DARK BACKGROUND */}
-          <div className="absolute inset-0 bg-[#020617]"></div>
+            {/* --- LEFT PANEL --- */}
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-[2px] bg-orange-500" />
+                <p className="text-orange-500 tracking-[0.4em] text-[10px] font-black uppercase">
+                  Industries We Serve
+                </p>
+              </div>
 
-          {/* 🔥 GRADIENT GLOW */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-orange-900 opacity-80"></div>
-
-          {/* 🔥 PATTERN */}
-          <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(135deg,transparent,transparent_60px,#f97316_60px,#f97316_62px)]"></div>
-
-          {/* 🔥 CONTENT */}
-          <div className="relative px-12 py-16 grid md:grid-cols-2 gap-16 text-white">
-
-            {/* LEFT */}
-            <div>
-
-              <h2 className="font-[var(--font-bebas)] text-[56px] leading-[0.95]">
-                RETHINK HOW <br /> YOUR WORK GETS <br /> DONE
+              {/* Removed italic, applied font-bold */}
+              <h2 className="font-[var(--font-bebas)] text-[50px] md:text-[70px] leading-[0.9] text-white font-bold">
+                POWERING HEAVY <br /> 
+                <span className="text-orange-500">INDUSTRIES</span> <br /> 
+                WITH PRECISION
               </h2>
 
-              <p className="mt-6 text-gray-300 leading-relaxed max-w-md">
-                Whether it's fit-out work, end-of-construction work, facility maintenance,
-                electrical or manufacturing—your team can do it safely, efficiently and
-                comfortably with an industrial work platform from JLG.
+              <p className="mt-6 text-gray-400 text-base leading-relaxed font-normal max-w-sm">
+                Pune Logitech delivers advanced crane rental and material handling 
+                solutions tailored for diverse industries. Our equipment ensures safety and efficiency.
               </p>
 
-              {/* BUTTON */}
-              <button className="mt-10 px-8 py-4 border border-orange-500 rounded-full text-white font-semibold tracking-wide hover:bg-orange-500 hover:text-black transition-all duration-300">
-                DOWNLOAD THE BROCHURE
-              </button>
-
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-8 px-8 py-3.5 border border-orange-500 rounded-full text-white text-xs font-black uppercase tracking-widest hover:bg-orange-500 hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(249,115,22,0.2)]"
+              >
+                Explore Services
+              </motion.button>
             </div>
 
-            {/* RIGHT */}
-            <div className="grid grid-cols-2 gap-y-10 gap-x-10">
-
-              {[
-                "Industrial and commercial construction",
-                "Mechanical and electrical trades",
-                "Data centers",
-                "Facility maintenance",
-                "Food processing and manufacturing",
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4">
-
-                  {/* ORANGE LINE */}
-                  <div className="w-[3px] h-6 bg-orange-500 mt-2"></div>
-
-                  <p className="text-lg text-white">{item}</p>
-
-                </div>
+            {/* --- RIGHT PANEL --- */}
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-x-8 gap-y-6">
+              {industries.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex items-start gap-4 group cursor-default"
+                >
+                  <div className="w-[2px] h-5 bg-orange-500 mt-1.5 group-hover:h-7 group-hover:bg-white transition-all duration-300 shadow-[0_0_8px_#f97316]" />
+                  <p className="text-sm md:text-[15px] font-bold text-white/70 group-hover:text-white transition-colors leading-snug">
+                    {item}
+                  </p>
+                </motion.div>
               ))}
-
+              
+              {/* Extra Accent */}
+              <div className="pt-4 border-t border-white/5 sm:col-span-2">
+                <p className="text-[9px] text-gray-600 font-mono tracking-[0.3em] uppercase font-bold">
+                  Logitech Operational Standards 2026 // SEC_IND_04
+                </p>
+              </div>
             </div>
 
           </div>
 
-        </div>
+          {/* 🎨 WATERMARK - Scaled down */}
+          <div className="absolute bottom-2 right-8 font-[var(--font-bebas)] text-[90px] text-white/[0.02] pointer-events-none select-none font-bold">
+            LOGITECH
+          </div>
+        </motion.div>
 
       </div>
-
     </section>
   );
 }

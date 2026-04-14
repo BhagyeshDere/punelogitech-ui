@@ -1,0 +1,10 @@
+:root {
+  --primary: #FF5A1F; /* JLG orange */
+  --secondary: #0F172A;
+  --text-dark: #111827;
+  --text-light: #6B7280;
+  --bg-light: #F5F5F5;
+  --white: #FFFFFF;
+
+  --radius: 16px;
+}

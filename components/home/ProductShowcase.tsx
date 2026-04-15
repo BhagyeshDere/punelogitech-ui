@@ -54,7 +54,8 @@ export default function ProductShowcase() {
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+      {/* Increased max-width to allow cards to expand horizontally */}
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10">
         
         {/* 🔥 HEADER SECTION */}
         <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -69,7 +70,6 @@ export default function ProductShowcase() {
                 Our Equipments
               </p>
             </div>
-            {/* Removed italic, applied normal bold weight */}
             <h2 className="font-[var(--font-bebas)] text-[70px] md:text-[110px] leading-[0.8] text-black font-bold">
               POWERFUL <br /> <span className="text-orange-500">MACHINES.</span>
             </h2>
@@ -85,8 +85,8 @@ export default function ProductShowcase() {
           </div>
         </div>
 
-        {/* 🔥 ASYMMETRIC GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4 items-start">
+        {/* 🔥 ASYMMETRIC GRID - Tightened gap to maximize card width */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
           {products.map((product, index) => (
             <motion.div
               key={index}
@@ -94,10 +94,10 @@ export default function ProductShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
               className={`relative group ${
-                index % 2 !== 0 ? "lg:mt-24" : "" // Stagger effect
+                index % 2 !== 0 ? "lg:mt-24" : "" 
               }`}
             >
-              {/* ASSET CONTAINER */}
+              {/* ASSET CONTAINER - Height maintained at 550px, width scales with grid */}
               <div className="relative h-[550px] w-full bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.08)] group-hover:shadow-[0_50px_100px_-30px_rgba(249,115,22,0.15)] transition-all duration-500 flex flex-col justify-end p-8 overflow-hidden">
                 
                 {/* BACKDROP NUMBER */}
@@ -106,12 +106,12 @@ export default function ProductShowcase() {
                 </span>
 
                 {/* DYNAMIC IMAGE Reveal */}
-                <div className="absolute inset-0 flex items-center justify-center p-6">
+                <div className="absolute inset-0 flex items-center justify-center p-4">
                   <motion.img
                     src={product.image}
                     alt={product.name}
-                    className="w-[140%] max-w-none h-auto object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.2)] z-10 
-                               group-hover:scale-110 group-hover:-translate-y-8 transition-all duration-700 ease-out"
+                    className="w-[110%] max-w-none h-auto object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.2)] z-10 
+                               group-hover:scale-105 group-hover:-translate-y-8 transition-all duration-700 ease-out"
                   />
                 </div>
 
@@ -126,7 +126,7 @@ export default function ProductShowcase() {
                   
                   {/* HIDDEN SPEC REVEAL */}
                   <div className="h-0 opacity-0 group-hover:h-12 group-hover:opacity-100 transition-all duration-500 overflow-hidden">
-                    <p className="text-gray-400 text-[11px] leading-relaxed max-w-[180px] font-bold">
+                    <p className="text-gray-400 text-[11px] leading-relaxed max-w-[220px] font-bold">
                       High performance industrial equipment optimized for heavy uptime.
                     </p>
                   </div>

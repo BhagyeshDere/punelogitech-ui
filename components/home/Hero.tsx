@@ -26,6 +26,47 @@ export default function Hero() {
 
   return (
     <section className="relative pt-20 md:pt-24 pb-12 bg-[#F3F3F3] overflow-hidden min-h-[85vh] flex items-center">
+      
+      {/* 🧩 ANIMATED BACKGROUND ELEMENTS */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Moving Grid Effect */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 2 }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(to right, #E5E5E5 1px, transparent 1px), linear-gradient(to bottom, #E5E5E5 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+        
+        {/* Ambient Floating Orbs */}
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-100/50 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 60, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gray-200/50 rounded-full blur-[120px]"
+        />
+
+        {/* Technical Scanning Line */}
+        <motion.div 
+          animate={{ y: ["-100%", "200%"] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent h-1/2 w-full"
+        />
+      </div>
+
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center px-6 md:px-8 gap-8 md:gap-12 relative z-20">
         
         {/* 🔥 LEFT CONTENT */}
@@ -44,7 +85,6 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          {/* Headline - Improved leading to prevent vertical cropping */}
           <div className="overflow-visible">
             <motion.h1
               variants={titleReveal}
@@ -144,7 +184,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Background Watermark - Adjusted size and positioning to prevent edge cropping */}
+      {/* Background Watermark */}
       <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-10 select-none pointer-events-none opacity-[0.04] z-10">
         <h2 className="font-[var(--font-bebas)] text-[180px] sm:text-[220px] md:text-[280px] lg:text-[320px] leading-none font-black tracking-tighter">
           PUNE

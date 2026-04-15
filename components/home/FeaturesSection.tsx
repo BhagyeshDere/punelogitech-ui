@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 export default function FeatureSection() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -13,10 +13,14 @@ export default function FeatureSection() {
   // Parallax for the background text
   const textX = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
+  // FIXED: Explicitly defined transition to satisfy TypeScript strict checks
   const cardVariants = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: "easeOut" }
+    transition: { 
+      duration: 0.5, 
+      ease: "easeOut" 
+    } as const // 'as const' ensures string literal types are preserved
   };
 
   return (
@@ -26,17 +30,14 @@ export default function FeatureSection() {
     >
       {/* 🏗️ ORANGE LINE DESIGN ELEMENTS */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Main Diagonal Accent Line */}
         <motion.div 
           style={{ scaleX: scrollYProgress }}
           className="absolute top-[20%] -left-[10%] w-[120%] h-[1px] bg-orange-500/20 -rotate-12 origin-left"
         />
         
-        {/* Vertical Engineering Lines */}
         <div className="absolute top-0 left-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-orange-500/10 to-transparent" />
         <div className="absolute top-0 left-[15.5%] w-[1px] h-full bg-gradient-to-b from-transparent via-orange-500/5 to-transparent" />
 
-        {/* Diagonal Stripe Pattern (Bottom Right) */}
         <div className="absolute -bottom-24 -right-24 w-96 h-96 opacity-[0.03]">
           {[...Array(10)].map((_, i) => (
             <div 
@@ -92,7 +93,6 @@ export default function FeatureSection() {
               </p>
             </div>
 
-            {/* Removed italic, kept Bebas Bold */}
             <h2 className="font-[var(--font-bebas)] text-[60px] md:text-[85px] leading-[0.9] text-black font-bold">
               BOOM LIFTS & <span className="text-orange-500">CRANES.</span>
             </h2>
@@ -145,7 +145,9 @@ export default function FeatureSection() {
           />
 
           <motion.div
-            {...cardVariants}
+            initial={cardVariants.initial}
+            whileInView={cardVariants.whileInView}
+            transition={cardVariants.transition}
             className="absolute left-4 top-[10%] md:left-[10%] md:top-[20%] z-20 bg-white/70 backdrop-blur-xl px-6 py-4 rounded-lg border border-white shadow-2xl flex items-center gap-4"
           >
             <div className="p-2 bg-orange-500 rounded text-white font-bold text-xs">01</div>
@@ -156,8 +158,9 @@ export default function FeatureSection() {
           </motion.div>
 
           <motion.div
-            {...cardVariants}
-            transition={{ delay: 0.2 }}
+            initial={cardVariants.initial}
+            whileInView={cardVariants.whileInView}
+            transition={{ ...cardVariants.transition, delay: 0.2 }}
             className="absolute right-4 top-[30%] md:right-[12%] md:top-[40%] z-20 bg-black/90 px-6 py-4 rounded-lg shadow-2xl flex items-center gap-4 text-white"
           >
             <div className="p-2 bg-orange-500 rounded text-white font-bold text-xs">02</div>
@@ -168,8 +171,9 @@ export default function FeatureSection() {
           </motion.div>
 
           <motion.div
-            {...cardVariants}
-            transition={{ delay: 0.4 }}
+            initial={cardVariants.initial}
+            whileInView={cardVariants.whileInView}
+            transition={{ ...cardVariants.transition, delay: 0.4 }}
             className="absolute right-8 bottom-0 md:right-[5%] md:bottom-[5%] z-20 bg-white px-6 py-4 rounded-lg shadow-2xl border border-gray-100 hidden md:flex items-center gap-4"
           >
             <div className="p-2 bg-orange-500 rounded text-white font-bold text-xs">03</div>
@@ -186,7 +190,6 @@ export default function FeatureSection() {
         HEAVY DUTY FLEET • CRANES • LIFTS •
       </motion.div>
 
-      {/* Grid Pattern Overlay */}
       <div className="absolute top-0 right-0 w-[40%] h-full opacity-5 pointer-events-none">
         <div className="w-full h-full bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:30px_30px]"></div>
       </div>

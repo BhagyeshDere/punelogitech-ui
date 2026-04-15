@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton"; // ✅ ADDED
 
 /* 🔥 FONTS */
 const geistSans = Geist({
@@ -47,18 +48,21 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bebas.variable} h-full scroll-smooth`}
     >
-      <body className="min-h-screen flex flex-col bg-white text-black antialiased">
-
+      <body className="min-h-screen flex flex-col bg-[#F8FAFC] text-black antialiased">
+        
         {/* 🔥 NAVBAR */}
         <Navbar />
 
         {/* 🔥 MAIN CONTENT */}
-        <main className="flex-1 pt-20 md:pt-24">
+        <main className="flex-1 relative z-10">
           {children}
         </main>
 
         {/* 🔥 FOOTER */}
         <Footer />
+
+        {/* 🔥 WHATSAPP FLOATING BUTTON */}
+        <WhatsAppButton />
 
       </body>
     </html>

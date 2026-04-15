@@ -1,5 +1,5 @@
 import Hero from "@/components/home/Hero";
-import VideoSection from "@/components/home/VideoSection";
+import AboutSection from "@/components/home/AboutSection"; // ✅ FIXED
 import FeaturesSection from "@/components/home/FeaturesSection";
 import FamilySection from "@/components/home/FamilySection";
 import ProductShowcase from "@/components/home/ProductShowcase";
@@ -14,9 +14,9 @@ export default function Home() {
       {/* 🔥 HERO */}
       <Hero />
 
-      {/* 🔥 VIDEO */}
+      {/* 🔥 ABOUT */}
       <section className="relative z-10">
-        <VideoSection />
+        <AboutSection />
       </section>
 
       {/* 🔥 FEATURES */}

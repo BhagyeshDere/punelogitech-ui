@@ -1,155 +1,177 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-
-const products = [
-  {
-    name: "BOOMLIFT",
-    image: "/images/products/boomlift.png",
-    tag: "Aerial Access",
-  },
-  {
-    name: "CRANE",
-    image: "/images/products/crane.png",
-    tag: "Heavy Lifting",
-  },
-  {
-    name: "TELEHANDLER",
-    image: "/images/products/talehandler.png",
-    tag: "Versatile Reach",
-  },
-  {
-    name: "FARANA CRANE",
-    image: "/images/products/farana.png",
-    tag: "Mobile Power",
-  },
-];
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ProductShowcase() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgTextX = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { 
+        delay: i * 0.15, 
+        duration: 0.9, 
+        ease: [0.16, 1, 0.3, 1] 
+      }
+    })
+  };
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative py-36 bg-[#F8F8F8] overflow-hidden"
-    >
-      {/* 🧩 DYNAMIC BACKGROUND ELEMENTS */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] bg-[grid-white_40px]" 
-             style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-        <motion.div 
-          style={{ x: bgTextX }}
-          className="absolute -bottom-10 left-0 whitespace-nowrap"
-        >
-          <span className="text-[260px] font-[var(--font-bebas)] font-black text-black/[0.03] uppercase">
-            Heavy Duty • Industrial Grade • Precision • 
-          </span>
-        </motion.div>
+    // ⬇️ REDUCED TOP PADDING FROM py-40 TO pt-20
+    <section className="relative pt-20 pb-40 bg-[#F8FAFC] overflow-hidden">
+      
+      {/* 🧩 TECHNICAL GRID BACKGROUND */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div 
+          className="absolute inset-0 opacity-[0.03]" 
+          style={{ 
+            backgroundImage: `linear-gradient(#0891b2 1.5px, transparent 1.5px), linear-gradient(90deg, #0891b2 1.5px, transparent 1.5px)`, 
+            backgroundSize: '60px 60px' 
+          }} 
+        />
       </div>
 
-      {/* Increased max-width to allow cards to expand horizontally */}
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-8 relative z-10">
         
-        {/* 🔥 HEADER SECTION */}
-        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-12 h-[2px] bg-orange-500" />
-              <p className="text-orange-500 tracking-[0.4em] text-xs font-black uppercase">
-                Our Equipments
-              </p>
-            </div>
-            <h2 className="font-[var(--font-bebas)] text-[70px] md:text-[110px] leading-[0.8] text-black font-bold">
-              POWERFUL <br /> <span className="text-orange-500">MACHINES.</span>
-            </h2>
-          </motion.div>
-          
-          <div className="hidden lg:block text-right">
-            <p className="text-gray-400 font-mono text-[10px] tracking-widest uppercase mb-2 font-bold">Fleet Status: Active</p>
-            <div className="flex gap-2 justify-end">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="w-8 h-[2px] bg-black/10" />
-              ))}
-            </div>
-          </div>
+        {/* 🏷️ SECTION HEADING - REDUCED MARGIN BOTTOM */}
+        <div className="mb-12 text-center md:text-left">
+          <p className="text-cyan-600 font-black text-xs tracking-[0.3em] uppercase mb-4">Core Fleet</p>
+          <h2 className="text-[#0F172A] font-black text-[50px] md:text-[70px] leading-[1] tracking-tighter">
+            PREMIUM <span className="text-cyan-500">MACHINERY</span>
+          </h2>
         </div>
 
-        {/* 🔥 ASYMMETRIC GRID - Tightened gap to maximize card width */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
-          {products.map((product, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-              className={`relative group ${
-                index % 2 !== 0 ? "lg:mt-24" : "" 
-              }`}
-            >
-              {/* ASSET CONTAINER - Height maintained at 550px, width scales with grid */}
-              <div className="relative h-[550px] w-full bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.08)] group-hover:shadow-[0_50px_100px_-30px_rgba(249,115,22,0.15)] transition-all duration-500 flex flex-col justify-end p-8 overflow-hidden">
-                
-                {/* BACKDROP NUMBER */}
-                <span className="absolute top-8 left-8 text-[120px] font-[var(--font-bebas)] text-black/[0.03] leading-none pointer-events-none font-bold">
-                  0{index + 1}
-                </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 xl:gap-6 items-start">
 
-                {/* DYNAMIC IMAGE Reveal */}
-                <div className="absolute inset-0 flex items-center justify-center p-4">
-                  <motion.img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-[110%] max-w-none h-auto object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.2)] z-10 
-                               group-hover:scale-105 group-hover:-translate-y-8 transition-all duration-700 ease-out"
-                  />
-                </div>
+          {/* 🔥 CARD 01 - MOBILE CRANE */}
+          <motion.div 
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            // ⬇️ REDUCED TOP MARGIN
+            className="relative mt-8 group justify-self-center"
+          >
+            <div className="relative w-[280px] md:w-[300px] lg:w-[320px] h-[550px]">
+              <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)] border border-slate-100 -z-10 group-hover:shadow-cyan-900/10 transition-shadow duration-700" />
+              <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(135deg,transparent,transparent_40px,#0891b2_40px,#0891b2_41px)] rounded-[2.5rem]" />
 
-                {/* CONTENT AREA */}
-                <div className="relative z-20">
-                  <p className="text-orange-500 font-black text-[9px] tracking-[0.2em] uppercase mb-1">
-                    {product.tag}
-                  </p>
-                  <h3 className="font-[var(--font-bebas)] text-[40px] leading-none text-black mb-4 font-bold">
-                    {product.name}
-                  </h3>
-                  
-                  {/* HIDDEN SPEC REVEAL */}
-                  <div className="h-0 opacity-0 group-hover:h-12 group-hover:opacity-100 transition-all duration-500 overflow-hidden">
-                    <p className="text-gray-400 text-[11px] leading-relaxed max-w-[220px] font-bold">
-                      High performance industrial equipment optimized for heavy uptime.
-                    </p>
-                  </div>
-                </div>
-
-                {/* BOTTOM GLOSS ACCENT */}
-                <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-500 to-orange-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              <div className="absolute left-8 top-10 z-20">
+                <p className="text-cyan-500 font-black text-[10px] tracking-widest uppercase mb-2">Fleet 01</p>
+                <h3 className="font-black text-[32px] lg:text-[38px] leading-[0.95] text-[#0F172A] tracking-tighter">
+                  MOBILE <br /> CRANE
+                </h3>
               </div>
 
-              {/* FLOATING ACTION BUTTON */}
-              <motion.div 
-                whileHover={{ rotate: 90 }}
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-black flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 cursor-pointer"
-              >
-                <span className="text-xl font-bold">→</span>
-              </motion.div>
-            </motion.div>
-          ))}
+              <motion.img
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                src="/images/products/crane.png"
+                className="absolute bottom-[-20px] right-[-30px] h-[450px] lg:h-[500px] object-contain z-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.15)] group-hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+          </motion.div>
+
+          {/* 🔥 CARD 02 - FARANA PRO-X (DARK) */}
+          <motion.div 
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            className="relative z-20 group justify-self-center"
+          >
+            <div className="relative w-[300px] md:w-[320px] lg:w-[340px] h-[600px]">
+              <div className="absolute inset-0 bg-slate-900 rounded-[3rem] shadow-[0_60px_100px_-20px_rgba(15,23,42,0.3)] -z-10" />
+              <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(135deg,transparent,transparent_40px,#06b6d4_40px,#06b6d4_42px)] rounded-[3rem]" />
+
+              <div className="absolute right-10 top-12 text-right z-20">
+                <div className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center ml-auto mb-4 shadow-lg shadow-cyan-500/40 group-hover:rotate-45 transition-transform duration-500">
+                  <ArrowUpRight className="text-white w-4 h-4" />
+                </div>
+                <p className="text-cyan-400 font-black text-[11px] tracking-widest uppercase mb-2">Heavy Flagship</p>
+                <h3 className="font-black text-[38px] lg:text-[45px] leading-[0.95] text-white tracking-tighter">
+                  FARANA <br /> <span className="text-cyan-500">PRO-X</span>
+                </h3>
+              </div>
+
+              <motion.img
+                animate={{ y: [0, 20, 0], rotate: [0, 1, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                src="/images/products/farana.png"
+                className="absolute bottom-[-30px] left-[-50px] h-[500px] lg:h-[550px] object-contain z-10 drop-shadow-[0_40px_50px_rgba(0,0,0,0.4)] group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </motion.div>
+
+          {/* 🔥 CARD 03 - TELEHANDLER */}
+          <motion.div 
+            custom={2}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            // ⬇️ REDUCED TOP MARGIN
+            className="relative mt-8 group justify-self-center"
+          >
+            <div className="relative w-[280px] md:w-[300px] lg:w-[320px] h-[550px]">
+              <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)] border border-slate-100 -z-10 group-hover:shadow-cyan-900/10 transition-shadow duration-700" />
+              <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(135deg,transparent,transparent_40px,#0891b2_40px,#0891b2_41px)] rounded-[2.5rem]" />
+
+              <div className="absolute left-8 top-10 z-20">
+                <p className="text-cyan-500 font-black text-[10px] tracking-widest uppercase mb-2">Fleet 03</p>
+                <h3 className="font-black text-[32px] lg:text-[38px] leading-[0.95] text-[#0F172A] tracking-tighter">
+                  TELE <br /> HANDLER
+                </h3>
+              </div>
+
+              <motion.img
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                src="/images/products/talehandler1.png"
+                className="absolute bottom-[-30px] right-[-40px] h-[450px] lg:h-[500px] object-contain z-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.12)] group-hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+          </motion.div>
+
+          {/* 🔥 CARD 04 - BOOMLIFT */}
+          <motion.div 
+            custom={3}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            className="relative z-10 group justify-self-center mt-0 xl:mt-8"
+          >
+            <div className="relative w-[280px] md:w-[300px] lg:w-[320px] h-[550px]">
+              <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)] border border-slate-100 -z-10 group-hover:shadow-cyan-900/10 transition-shadow duration-700" />
+              <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(135deg,transparent,transparent_40px,#0891b2_40px,#0891b2_41px)] rounded-[2.5rem]" />
+
+              <div className="absolute left-8 top-10 z-20">
+                <p className="text-cyan-500 font-black text-[10px] tracking-widest uppercase mb-2">Fleet 04</p>
+                <h3 className="font-black text-[32px] lg:text-[38px] leading-[0.95] text-[#0F172A] tracking-tighter">
+                  BOOM <br /> LIFT
+                </h3>
+              </div>
+
+              <motion.img
+                animate={{ x: [0, 10, 0], y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                src="/images/products/boomlift.png"
+                className="absolute bottom-[-35px] right-[-50px] h-[500px] lg:h-[560px] object-contain z-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.18)] group-hover:scale-115 transition-transform duration-700"
+              />
+            </div>
+          </motion.div>
+
         </div>
       </div>
 
-      {/* 🏁 SIDE DECOR */}
-      <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-transparent via-black/10 to-transparent" />
+      {/* 🔷 ATMOSPHERIC DEPTH GLOWS */}
+      <div className="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] bg-cyan-400/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-[10%] right-[-100px] w-[400px] h-[400px] bg-blue-400/5 blur-[120px] rounded-full pointer-events-none" />
+
     </section>
   );
 }

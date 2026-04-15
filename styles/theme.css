@@ -1,10 +1,25 @@
 :root {
-  --primary: #FF5A1F; /* JLG orange */
-  --secondary: #0F172A;
-  --text-dark: #111827;
-  --text-light: #6B7280;
-  --bg-light: #F5F5F5;
+  /* 🔵 PRIMARY BRAND COLORS */
+  --primary: #06B6D4;       /* Cyan (main brand color) */
+  --primary-dark: #0EA5E9;  /* Deep blue-cyan */
+  --primary-light: #67E8F9; /* Light glow */
+
+  /* ⚙️ INDUSTRIAL / NEUTRAL */
+  --secondary: #0F172A;     /* Dark blue (background / navbar) */
+  --accent: #38BDF8;        /* Highlight blue */
+
+  /* 🧾 TEXT */
+  --text-dark: #111827;     /* Main text */
+  --text-light: #6B7280;    /* Secondary text */
+
+  /* 🎯 BACKGROUNDS */
+  --bg-light: #F3F4F6;      /* Light grey */
+  --bg-dark: #020617;       /* Dark section background */
   --white: #FFFFFF;
 
+  /* 🧊 METALLIC FEEL */
+  --metal: #9CA3AF;         /* Silver tone */
+
+  /* 🔲 UI */
   --radius: 16px;
 }

@@ -1,125 +1,160 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Truck, ArrowUpRight, Award } from "lucide-react";
+import { Calendar, TrendingUp, Anchor, ShieldCheck, ArrowRight } from "lucide-react";
 
 export default function StatsSection() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  };
+
   return (
-    <section className="relative py-32 bg-[#F8F8F8] overflow-hidden">
-      {/* 🟠 BACKGROUND ORANGE SHADE GRADIENT */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 blur-[120px] rounded-full -mr-64 -mt-64 pointer-events-none" />
+    <section className="py-32 bg-[#F8FAFC] relative overflow-hidden">
       
+      {/* 🧩 BACKGROUND DECOR */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none bg-[radial-gradient(#06b6d4_1.2px,transparent_1.2px)] [background-size:40px_40px]" />
+
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         
-        {/* 🔥 HEADING */}
-        <div className="mb-20 space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="w-10 h-[2px] bg-orange-500" />
-            <p className="text-orange-500 tracking-[0.4em] text-[10px] font-black uppercase">Fleet Performance</p>
-          </div>
-          <motion.h2
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="font-[var(--font-bebas)] text-[60px] md:text-[90px] leading-[0.85] text-black font-bold"
+        {/* 🔥 HEADING SECTION */}
+        <div className="flex flex-col items-center mb-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-3 mb-4"
           >
-            OUR PERFORMANCE <br /> <span className="text-orange-500">IN NUMBERS.</span>
+            <span className="w-8 h-[1px] bg-cyan-500" />
+            <p className="text-cyan-600 tracking-[0.4em] text-[10px] font-black uppercase">Performance Metrics</p>
+            <span className="w-8 h-[1px] bg-cyan-500" />
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center font-black text-[50px] md:text-[75px] leading-[0.9] text-slate-900 tracking-tighter"
+          >
+            A LEGACY OF <span className="text-cyan-500">PRECISION.</span>
           </motion.h2>
         </div>
 
         {/* 🔥 BENTO GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px]"
+        >
 
-          {/* 🏆 YEARS EXPERIENCE: MAIN FEATURE CARD */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -10 }}
-            className="md:col-span-2 md:row-span-2 bg-white border border-gray-100 rounded-[2.5rem] p-12 flex flex-col justify-between min-h-[500px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] relative overflow-hidden group"
+          {/* 🔥 01. TALL IMPACT CARD */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-slate-900 rounded-[2rem] p-10 md:row-span-2 flex flex-col justify-between relative overflow-hidden group shadow-2xl shadow-slate-200"
           >
-            <div className="absolute top-0 left-0 w-full h-2 bg-orange-500" />
-            <div className="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center text-orange-500">
-              <Award size={32} />
-            </div>
-
-            <div>
-              <div className="flex items-baseline gap-2">
-                <h3 className="text-[120px] font-[var(--font-bebas)] leading-none text-black font-bold">12</h3>
-                <span className="text-6xl font-[var(--font-bebas)] text-orange-500 font-bold">+</span>
-              </div>
-              <p className="text-gray-400 font-mono text-xs uppercase tracking-[0.3em] mb-4 font-bold">Years of Mastery</p>
-              <p className="text-gray-500 text-lg leading-relaxed max-w-sm font-normal">
-                A decade of delivering reliable crane rental and lifting solutions with an impeccable safety record across industrial landscapes.
-              </p>
+            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+              <Anchor size={120} className="text-cyan-400" />
             </div>
             
-            <div className="absolute -bottom-10 -right-10 text-[180px] font-[var(--font-bebas)] text-black/[0.02] pointer-events-none select-none font-bold">
-              XP
+            <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
+              <ShieldCheck className="text-cyan-400 w-7 h-7" />
             </div>
-          </motion.div>
 
-          {/* 🚛 PROJECTS CARD */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="md:col-span-2 bg-white/70 backdrop-blur-xl border border-gray-100 rounded-[2.5rem] p-8 flex items-center justify-between shadow-[0_20px_40px_-15px_rgba(249,115,22,0.1)] group"
-          >
-            <div className="flex items-center gap-8">
-              <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center text-white rotate-3 group-hover:rotate-0 transition-transform">
-                <Truck size={36} />
-              </div>
-              <div>
-                <h3 className="text-5xl font-[var(--font-bebas)] text-black leading-none font-bold">500+</h3>
-                <p className="text-orange-500 font-black text-[10px] tracking-widest uppercase mt-2">Projects Completed</p>
-              </div>
-            </div>
-            <ArrowUpRight className="text-gray-300 group-hover:text-orange-500 transition-colors" size={32} />
-          </motion.div>
-
-          {/* 🖼️ IMAGE WORK Card */}
-          <div className="relative group rounded-[2.5rem] overflow-hidden shadow-xl h-[240px]">
-            <img
-              src="/images/stats/img1.png"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              alt="Crane Work"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <p className="absolute bottom-6 left-6 text-white font-black text-[10px] tracking-widest uppercase">Field Operation</p>
-          </div>
-
-          {/* 👥 CLIENTS CARD */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-orange-500 rounded-[2.5rem] p-8 flex flex-col justify-between shadow-[0_30px_60px_-15px_rgba(249,115,22,0.3)] text-white"
-          >
-            <Users size={32} />
-            <div>
-              <h3 className="text-5xl font-[var(--font-bebas)] leading-none font-bold">100+</h3>
-              <p className="text-orange-100 font-bold text-xs mt-2 uppercase tracking-tighter leading-tight">
-                Trusted Global Clients
+            <div className="relative z-10">
+              {/* UPDATED FONT */}
+              <h3 className="text-white font-black text-[52px] md:text-[64px] leading-[0.9] mb-4 tracking-tighter">
+                500<span className="text-cyan-500">+</span> <br /> PROJECTS
+              </h3>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-[240px]">
+                High-stakes crane operations executed with zero-compromise safety standards across pan-India sites.
               </p>
             </div>
           </motion.div>
 
-        </div>
+          {/* 🔥 02. EXPERIENCE CARD */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-white border border-slate-100 rounded-[2rem] p-8 flex flex-col justify-between group hover:border-cyan-500/30 transition-colors duration-500"
+          >
+            <div className="flex justify-between items-start">
+              {/* UPDATED FONT */}
+              <h3 className="text-slate-900 font-black text-[42px] leading-[0.9] tracking-tighter">
+                10<span className="text-cyan-500">+</span> <br /> YEARS
+              </h3>
+              <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-cyan-50 transition-colors">
+                <Calendar size={24} className="text-cyan-600" />
+              </div>
+            </div>
+            <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Industry Expertise</p>
+          </motion.div>
+
+          {/* 🔥 03. TOP RIGHT IMAGE */}
+          <motion.div 
+            variants={itemVariants}
+            className="rounded-[2rem] overflow-hidden relative group"
+          >
+            <div className="absolute inset-0 bg-cyan-900/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+            <img
+              src="/images/stats/img2.png"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+              alt="Industrial Site"
+            />
+          </motion.div>
+
+          {/* 🔥 04. BOTTOM LEFT IMAGE */}
+          <motion.div 
+            variants={itemVariants}
+            className="rounded-[2rem] overflow-hidden relative group"
+          >
+            <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+            <img
+              src="/images/stats/img1.png"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+              alt="Logitech Crane"
+            />
+          </motion.div>
+
+          {/* 🔥 05. CLIENTS CARD */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-white border border-slate-100 rounded-[2rem] p-8 flex items-center gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all"
+          >
+            <div className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:rotate-12 transition-transform">
+              <TrendingUp className="text-white w-8 h-8" />
+            </div>
+            <div>
+              {/* UPDATED FONT */}
+              <h3 className="text-slate-900 font-black text-[42px] leading-[0.9] tracking-tighter">
+                100<span className="text-cyan-500">+</span> <br /> CLIENTS
+              </h3>
+              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">Trusted Partners Worldwide</p>
+            </div>
+          </motion.div>
+
+        </motion.div>
 
         {/* 🔥 CTA BUTTON */}
-        <div className="flex justify-center mt-20">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-12 py-5 bg-black text-white rounded-full font-black text-[11px] tracking-[0.3em] uppercase flex items-center gap-4 group transition-all hover:bg-orange-600 shadow-2xl shadow-black/10"
-          >
-            View Our Portfolio
-            <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/40 transition-colors">
-              <ArrowUpRight size={14} />
-            </div>
-          </motion.button>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="flex justify-center mt-20"
+        >
+          <button className="group relative flex items-center gap-4 px-12 py-5 bg-white border border-slate-200 rounded-full font-bold text-xs uppercase tracking-[0.2em] overflow-hidden transition-all hover:border-cyan-500 shadow-sm">
+            <span className="relative z-10">View Our Portfolio</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform relative z-10" />
+            <div className="absolute inset-0 bg-cyan-50 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+          </button>
+        </motion.div>
 
       </div>
-      
-      {/* BACKGROUND ACCENT LINE */}
-      <div className="absolute bottom-10 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+
     </section>
   );
 }

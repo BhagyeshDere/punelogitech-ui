@@ -18,7 +18,6 @@ export default function ProductShowcase() {
   };
 
   return (
-    // ⬇️ REDUCED TOP PADDING FROM py-40 TO pt-20
     <section className="relative pt-20 pb-40 bg-[#F8FAFC] overflow-hidden">
       
       {/* 🧩 TECHNICAL GRID BACKGROUND */}
@@ -34,7 +33,7 @@ export default function ProductShowcase() {
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 relative z-10">
         
-        {/* 🏷️ SECTION HEADING - REDUCED MARGIN BOTTOM */}
+        {/* 🏷️ SECTION HEADING */}
         <div className="mb-12 text-center md:text-left">
           <p className="text-cyan-600 font-black text-xs tracking-[0.3em] uppercase mb-4">Core Fleet</p>
           <h2 className="text-[#0F172A] font-black text-[50px] md:text-[70px] leading-[1] tracking-tighter">
@@ -51,7 +50,6 @@ export default function ProductShowcase() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={cardVariants}
-            // ⬇️ REDUCED TOP MARGIN
             className="relative mt-8 group justify-self-center"
           >
             <div className="relative w-[280px] md:w-[300px] lg:w-[320px] h-[550px]">
@@ -74,7 +72,7 @@ export default function ProductShowcase() {
             </div>
           </motion.div>
 
-          {/* 🔥 CARD 02 - FARANA PRO-X (DARK) */}
+          {/* 🔥 CARD 02 - FARANA PRO-X (DARK SLATE) */}
           <motion.div 
             custom={1}
             initial="hidden"
@@ -106,23 +104,23 @@ export default function ProductShowcase() {
             </div>
           </motion.div>
 
-          {/* 🔥 CARD 03 - TELEHANDLER */}
+          {/* 🔥 CARD 03 - TELEHANDLER (BLUE THEME) */}
           <motion.div 
             custom={2}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={cardVariants}
-            // ⬇️ REDUCED TOP MARGIN
             className="relative mt-8 group justify-self-center"
           >
             <div className="relative w-[280px] md:w-[300px] lg:w-[320px] h-[550px]">
-              <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)] border border-slate-100 -z-10 group-hover:shadow-cyan-900/10 transition-shadow duration-700" />
-              <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(135deg,transparent,transparent_40px,#0891b2_40px,#0891b2_41px)] rounded-[2.5rem]" />
+              {/* UPDATED TO BLUE BACKGROUND */}
+              <div className="absolute inset-0 bg-cyan-600 rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(8,145,178,0.3)] -z-10" />
+              <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(135deg,transparent,transparent_40px,#ffffff_40px,#ffffff_41px)] rounded-[2.5rem]" />
 
               <div className="absolute left-8 top-10 z-20">
-                <p className="text-cyan-500 font-black text-[10px] tracking-widest uppercase mb-2">Fleet 03</p>
-                <h3 className="font-black text-[32px] lg:text-[38px] leading-[0.95] text-[#0F172A] tracking-tighter">
+                <p className="text-white/80 font-black text-[10px] tracking-widest uppercase mb-2">Fleet 03</p>
+                <h3 className="font-black text-[32px] lg:text-[38px] leading-[0.95] text-white tracking-tighter">
                   TELE <br /> HANDLER
                 </h3>
               </div>
@@ -131,7 +129,7 @@ export default function ProductShowcase() {
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                 src="/images/products/talehandler1.png"
-                className="absolute bottom-[-30px] right-[-40px] h-[450px] lg:h-[500px] object-contain z-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.12)] group-hover:scale-110 transition-transform duration-700"
+                className="absolute bottom-[-30px] right-[-40px] h-[450px] lg:h-[500px] object-contain z-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.2)] group-hover:scale-110 transition-transform duration-700"
               />
             </div>
           </motion.div>

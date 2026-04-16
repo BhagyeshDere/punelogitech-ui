@@ -157,7 +157,7 @@ export default function ProductShowcase() {
               <motion.img
                 animate={{ x: [0, 10, 0], y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                src="/images/products/boomlift.png"
+                src="/images/products/boom.png"
                 className="absolute bottom-[-35px] right-[-50px] h-[500px] lg:h-[560px] object-contain z-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.18)] group-hover:scale-115 transition-transform duration-700"
               />
             </div>

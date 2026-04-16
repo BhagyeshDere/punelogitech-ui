@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
-import VideoSection from "@/components/home/VideoSection"; // ✅ ADDED
+{/*  
+      <Hero />import VideoSection from "@/components/home/VideoSection"; // ✅ ADDED*/}
 import AboutSection from "@/components/home/AboutSection";
 
 import FeaturesSection from "@/components/home/FeaturesSection";
@@ -16,10 +17,10 @@ export default function Home() {
       {/* 🔥 HERO */}
       <Hero />
 
-      {/* 🔥 VIDEO SECTION */}
+      {/* 🔥 VIDEO SECTION 
       <section className="relative z-10">
         <VideoSection />
-      </section>
+      </section>*/}
 
       {/* 🔥 ABOUT */}
       <section className="relative z-10">

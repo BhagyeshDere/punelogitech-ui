@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Play, ShieldCheck, Activity } from "lucide-react";
 
 export default function VideoSection() {
@@ -8,7 +8,7 @@ export default function VideoSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
@@ -18,8 +18,9 @@ export default function VideoSection() {
   };
 
   return (
-    <section className="relative py-24 md:py-36 bg-[#F8FAFC] overflow-hidden font-sans">
+    <section className="relative py-20 md:py-32 bg-[#F8FAFC] overflow-hidden font-sans">
       
+      {/* 🔷 BACKGROUND DECO */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div 
           className="absolute inset-0 opacity-[0.03]" 
@@ -35,12 +36,12 @@ export default function VideoSection() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="max-w-7xl mx-auto grid lg:grid-cols-12 items-center gap-16 px-6 md:px-10 relative z-10"
+        viewport={{ once: true, margin: "-50px" }}
+        className="max-w-7xl mx-auto grid lg:grid-cols-12 items-center gap-12 lg:gap-16 px-6 md:px-10 relative z-10"
       >
         
         {/* LEFT CONTENT */}
-        <div className="lg:col-span-5 flex flex-col justify-center">
+        <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1">
           <motion.div variants={itemVariants} className="flex items-center gap-3 mb-6">
             <span className="w-8 h-[3px] bg-cyan-500" />
             <p className="text-cyan-600 tracking-[0.4em] text-[11px] font-black uppercase">
@@ -50,7 +51,7 @@ export default function VideoSection() {
 
           <motion.h2 
             variants={itemVariants}
-            className="text-[52px] md:text-[68px] lg:text-[76px] font-[1000] leading-[0.95] text-slate-950 mb-8 tracking-tighter uppercase"
+            className="text-[48px] md:text-[64px] lg:text-[72px] font-[1000] leading-[0.95] text-slate-950 mb-8 tracking-tighter uppercase"
           >
             SMARTER <span className="text-cyan-500">LIFTING</span> <br /> SOLUTIONS
           </motion.h2>
@@ -79,60 +80,61 @@ export default function VideoSection() {
           </motion.div>
         </div>
 
-        {/* RIGHT VIDEO */}
-        <div className="lg:col-span-7 relative">
+        {/* RIGHT VIDEO - ALWAYS VISIBLE PRIORITY */}
+        <div className="lg:col-span-7 relative order-1 lg:order-2 w-full">
           
           <motion.div 
             animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute -right-8 -top-8 w-32 h-32 border-2 border-dashed border-cyan-200 rounded-full opacity-50 hidden md:block" 
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute -right-4 -top-4 md:-right-8 md:-top-8 w-24 h-24 md:w-32 md:h-32 border-2 border-dashed border-cyan-200 rounded-full opacity-50 z-0" 
           />
 
           {/* 🔥 VIDEO CARD */}
           <motion.div 
             variants={{
-                hidden: { opacity: 0, scale: 0.95, x: 20 },
-                visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 1, ease: "easeOut" } }
+                hidden: { opacity: 0, scale: 0.98 },
+                visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
             }}
-            className="relative z-10 rounded-2xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(15,23,42,0.2)] border border-white group"
+            className="relative z-10 rounded-2xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(15,23,42,0.25)] border-2 border-white group w-full bg-slate-100"
           >
             
-            {/* VIDEO */}
+            {/* VIDEO ELEMENT */}
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-[350px] md:h-[480px] object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              className="w-full aspect-video lg:h-[480px] object-cover grayscale-[0.1] group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
             >
               <source src="/videos/crane.mp4" type="video/mp4" />
             </video>
 
             {/* PLAY OVERLAY */}
-            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none group-hover:opacity-0 transition-opacity duration-500">
-               <div className="w-24 h-24 bg-white/20 backdrop-blur-xl rounded-full border-2 border-white/50 flex items-center justify-center shadow-2xl">
-                  <Play size={32} className="text-white fill-white ml-1" />
-               </div>
+            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+               <motion.div 
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="w-20 h-20 md:w-24 md:h-24 bg-white/10 backdrop-blur-xl rounded-full border-2 border-white/40 flex items-center justify-center shadow-2xl"
+               >
+                  <Play size={32} className="text-white fill-white ml-1 opacity-80" />
+               </motion.div>
             </div>
 
-            {/* LABEL */}
-            <div className="absolute bottom-6 left-6 z-20 flex items-center gap-4 bg-slate-900/60 backdrop-blur-2xl px-6 py-4 rounded-xl border border-white/20">
+            {/* STATUS LABEL */}
+            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-20 flex items-center gap-4 bg-slate-900/80 backdrop-blur-2xl px-5 py-3 md:px-6 md:py-4 rounded-xl border border-white/20">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_#22d3ee]" />
-              <p className="text-white text-[11px] font-black tracking-[0.25em] uppercase">Watch Facility Tour</p>
+              <p className="text-white text-[10px] md:text-[11px] font-black tracking-[0.25em] uppercase">Watch Facility Tour</p>
             </div>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, x: 20, y: 20 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="absolute -right-6 -bottom-6 w-full h-full bg-slate-200/50 rounded-2xl -z-10 border-r-4 border-b-4 border-slate-300/30" 
-          />
+          {/* SHADOW ACCENT */}
+          <div className="absolute -right-4 -bottom-4 md:-right-6 md:-bottom-6 w-full h-full bg-slate-200/60 rounded-2xl -z-10 border-r-4 border-b-4 border-slate-300/20" />
         </div>
 
       </motion.div>
 
-      <div className="absolute top-1/2 left-0 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-100/30 blur-[130px] rounded-full pointer-events-none" />
+      {/* AMBIENT LIGHTING */}
+      <div className="absolute top-1/2 left-0 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-100/40 blur-[130px] rounded-full pointer-events-none opacity-50" />
     </section>
   );
 }

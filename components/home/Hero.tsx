@@ -1,19 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
+  // ⚡ STATE TO TRACK IF LOADER IS FINISHED
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Matches your loader duration (4000ms) 
+    const timer = setTimeout(() => setIsReady(true), 4100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const fadeInDown = {
+    hidden: { opacity: 0, y: -30 }, // Reduced distance for faster feel
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.8, ease: "easeOut" } 
+      transition: { duration: 0.5, ease: "easeOut" } // Reduced from 0.8 to 0.5
     }
   } as const;
 
   const staggerContainer = {
-    visible: { transition: { staggerChildren: 0.15 } }
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1, // Reduced from 0.2 to 0.1 for faster sequence
+        delayChildren: 0.05   // Reduced from 0.1 to 0.05
+      } 
+    }
   } as const;
 
   return (
@@ -46,16 +63,18 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-[1440px] mx-auto grid md:grid-cols-2 items-center px-8 md:px-12 lg:px-16 relative z-10">
+      {/* 🛠️ THE FIX: Using 'key={isReady}' forces the entire grid to re-animate when isReady becomes true */}
+      <motion.div 
+        key={isReady ? "ready" : "loading"}
+        initial="hidden"
+        animate={isReady ? "visible" : "hidden"}
+        variants={staggerContainer}
+        className="max-w-[1440px] mx-auto grid md:grid-cols-2 items-center px-8 md:px-12 lg:px-16 relative z-10"
+      >
         
         {/* 🔥 LEFT CONTENT */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="flex flex-col justify-center"
-        >
-          <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-6">
+        <div className="flex flex-col justify-center">
+          <motion.div variants={fadeInDown} className="flex items-center gap-3 mb-6">
             <span className="w-10 h-[2px] bg-cyan-500" />
             <p className="text-cyan-600 tracking-[0.4em] text-[10px] md:text-xs font-black uppercase">
               Pune Logitech • Premium Equipment
@@ -63,41 +82,42 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 
-            variants={fadeInUp}
+            variants={fadeInDown}
             className="font-[var(--font-bebas)] text-[80px] md:text-[110px] lg:text-[130px] leading-[0.8] text-[#0F172A] font-black"
           >
             REACH NEW
           </motion.h1>
 
           <motion.h2 
-            variants={fadeInUp}
+            variants={fadeInDown}
             className="font-[var(--font-bebas)] text-[40px] md:text-[60px] lg:text-[70px] tracking-[8px] md:tracking-[12px] text-cyan-500 leading-none mt-2"
           >
             POSSIBILITIES
           </motion.h2>
 
           <motion.p 
-            variants={fadeInUp}
+            variants={fadeInDown}
             className="mt-8 text-gray-500 text-base md:text-lg max-w-md leading-relaxed font-medium"
           >
             Delivering excellence in crane rentals, material handling, 
             and engineering solutions for over <span className="text-cyan-600 font-bold">12 years</span>.
           </motion.p>
 
-          <motion.div variants={fadeInUp} className="mt-10">
+          <motion.div variants={fadeInDown} className="mt-10">
             <button className="group relative px-10 py-4 overflow-hidden border-2 border-cyan-500 rounded-full font-black text-xs tracking-widest text-cyan-600 transition-all duration-300 hover:text-white">
               <span className="absolute inset-0 bg-cyan-500 translate-y-[100%] transition-transform duration-300 group-hover:translate-y-0" />
               <span className="relative z-10">VIEW INVENTORY</span>
             </button>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* 🔥 RIGHT SIDE: EQUIPMENT */}
         <div className="relative flex justify-center lg:justify-end items-center lg:-mr-24"> 
           <motion.div 
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 20, opacity: 1 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            variants={{
+              hidden: { x: 50, opacity: 0 },
+              visible: { x: 20, opacity: 1, transition: { delay: 0.3, duration: 0.6 } } // Reduced duration
+            }}
             className="absolute top-0 right-10 z-30 bg-white/60 backdrop-blur-md p-4 border border-white/40 rounded-2xl shadow-xl hidden lg:block"
           >
             <div className="flex items-center gap-3">
@@ -107,9 +127,10 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, x: 100 }}
-            animate={{ scale: 1.05, opacity: 1, x: 60 }} 
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            variants={{
+              hidden: { opacity: 0, x: 150 }, // Reduced distance from 200
+              visible: { opacity: 1, x: 60, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } } // Reduced from 1.2
+            }}
             className="relative z-10" 
           >
             <img
@@ -119,16 +140,20 @@ export default function Hero() {
             />
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* 🧩 DECORATIVE BACKGROUND TEXT */}
-      <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-10 select-none pointer-events-none opacity-[0.03] z-0">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={isReady ? { opacity: 0.03 } : { opacity: 0 }}
+        transition={{ delay: 0.5, duration: 1.0 }} // Reduced delay and duration
+        className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-10 select-none pointer-events-none z-0"
+      >
         <h2 className="font-[var(--font-bebas)] text-[200px] lg:text-[350px] leading-none font-black text-slate-900">
           PUNE
         </h2>
-      </div>
+      </motion.div>
 
-      {/* 🛠️ UPDATED: WHITE SHADOW / GRADIENT FADE TO HIDE THE BOTTOM LINE */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#F5F7FA] via-[#F5F7FA]/80 to-transparent z-20 pointer-events-none" />
     </section>
   );

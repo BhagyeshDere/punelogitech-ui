@@ -7,223 +7,228 @@ export default function AboutSection() {
   const [particles, setParticles] = useState<{ left: string; top: string; delay: number }[]>([]);
 
   useEffect(() => {
-    const generated = [...Array(6)].map((_, i) => ({
+    const generated = [...Array(10)].map((_, i) => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      delay: i * 0.5,
+      delay: i * 0.3,
     }));
     setParticles(generated);
   }, []);
 
   return (
-    <section className="relative py-32 bg-[#F8FAFC] overflow-hidden">
+    <section className="relative pt-12 pb-24 bg-[#F8FAFC] overflow-hidden font-sans">
       
-      {/* 🧩 ANIMATED BACKGROUND ELEMENTS */}
+      {/* 🧩 ENHANCED DYNAMIC BACKGROUND: LAYERED CIRCLES & BLUISH EFFECTS */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {particles.map((p, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-cyan-200 rounded-full opacity-40"
-            animate={{
-              y: [0, -100, 0],
-              x: [0, 30, 0],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 5 + i,
-              repeat: Infinity,
-              ease: "linear",
-              delay: p.delay,
-            }}
-            style={{ left: p.left, top: p.top }}
-          />
-        ))}
         
-        <motion.div 
-          animate={{ opacity: [0.05, 0.15, 0.05] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-cyan-400 rounded-full blur-[120px]"
+        {/* --- NEW: THEMATIC BLUISH GRADIENTS --- */}
+        <div 
+          className="absolute inset-0 opacity-40"
+          style={{
+            background: `radial-gradient(circle at 80% 80%, #E0F2FE 0%, transparent 40%), 
+                         radial-gradient(circle at 20% 20%, #ECFEFF 0%, transparent 40%)`
+          }}
         />
+        
+        {/* Soft Glow Blobs */}
+        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-cyan-200/30 blur-[100px] rounded-full" />
+        <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-blue-100/40 blur-[120px] rounded-full" />
+
+        <div className="flex items-center justify-center h-full w-full">
+          {/* Primary Circles */}
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={`primary-${i}`}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 0.05, scale: 1 }}
+              transition={{ duration: 1.5, delay: i * 0.08 }}
+              className="absolute border border-cyan-400 rounded-full"
+              style={{
+                width: `${(i + 1) * 320}px`,
+                height: `${(i + 1) * 320}px`,
+              }}
+            />
+          ))}
+
+          {/* Secondary Decorative Accent Circles */}
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={`accent-${i}`}
+              animate={{ 
+                scale: [1, 1.1, 1],
+                opacity: [0.02, 0.04, 0.02] 
+              }}
+              transition={{ 
+                duration: 8, 
+                repeat: Infinity, 
+                delay: i * 2 
+              }}
+              className="absolute border-[2px] border-blue-200 rounded-full"
+              style={{
+                width: `${(i + 1) * 600}px`,
+                height: `${(i + 1) * 600}px`,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-8 relative z-10">
 
-        {/* 🔥 TOP CONTENT */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-
-          {/* LEFT IMAGE (ENLARGED) */}
+        {/* 🔥 TOP SECTION */}
+        <div className="grid lg:grid-cols-2 gap-16 items-start mb-0">
+          
+          {/* IMAGE 1 */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: -60 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative flex justify-center lg:justify-start"
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative flex justify-center lg:justify-start pt-10"
           >
-            <motion.img
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              src="/images/about/img1.png"
-              className="w-[320px] md:w-[420px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)]"
-              alt="vertical lift"
+            <img
+              src="/images/about/img3.png"
+              className="w-full max-w-[550px] md:max-w-[600px] xl:max-w-[650px] object-contain drop-shadow-2xl z-10 scale-105 origin-left"
+              alt="Vertical Lift Main View"
             />
 
-            {/* 🏷️ PERMANENT VERTICAL TAGS */}
-            <motion.div
+            {/* Spec Cards - Image 1 */}
+            <motion.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="absolute top-[20%] -left-6 bg-slate-900 text-white px-4 py-2 rounded-lg shadow-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 border-l-4 border-cyan-400"
+              className="absolute top-[10%] -left-8 bg-[#131B2E] text-white px-6 py-4 rounded-lg shadow-2xl text-[12px] font-black uppercase tracking-widest border-l-4 border-[#00B4D8] z-20"
             >
-              17-ft 4-in working height
+              Max Reach: 17-ft 4-in
             </motion.div>
 
-            <motion.div
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="absolute top-[40%] -right-4 bg-white p-5 rounded-xl shadow-2xl border border-slate-100 max-w-[160px] z-20 hidden md:block"
+            >
+              <p className="text-[10px] font-black text-[#00B4D8] uppercase mb-1">Precision</p>
+              <p className="text-[12px] font-bold text-slate-700 leading-tight">Proportional joystick controls</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="absolute top-[70%] -right-8 bg-[#F8FAFC] p-4 rounded-lg shadow-xl border-t-4 border-blue-500 z-20 hidden xl:block"
+            >
+              <p className="text-[10px] font-black text-slate-400 uppercase">Load Cap.</p>
+              <p className="text-[14px] font-bold text-[#131B2E]">500 lbs (227 kg)</p>
+            </motion.div>
+
+            <motion.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 }}
-              className="absolute top-[55%] -left-2 bg-white px-4 py-2 rounded-lg shadow-lg text-[10px] font-bold text-slate-700 border border-slate-200"
+              transition={{ delay: 0.2 }}
+              className="absolute bottom-[10%] -left-4 bg-white text-slate-800 px-5 py-4 rounded-lg shadow-xl text-[11px] font-black uppercase tracking-widest border border-slate-200 z-20"
             >
               11-ft 4-in platform height
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-32 -right-4 md:right-10 bg-white/95 backdrop-blur-md px-6 py-3 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border-l-4 border-cyan-500 text-sm font-bold text-slate-800"
-            >
-              ROBUST WORK PLATFORM <span className="text-cyan-600 block text-xs font-medium uppercase mt-1">Hands-free access</span>
-            </motion.div>
           </motion.div>
 
-          {/* RIGHT TEXT */}
+          {/* TEXT INFORMATION - Shifted Right (using lg:pl-16) */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="lg:pt-16 lg:pl-16"
           >
-            <h2 className="text-[52px] md:text-[64px] leading-[1] text-[#0F172A] font-extrabold tracking-tighter">
-              ADVANCED LIFTING <br />
-              <span className="text-cyan-600 italic">SOLUTIONS</span> FOR <br />
-              MODERN PROJECTS
+            <p className="text-[#00B4D8] font-black tracking-[0.2em] uppercase text-sm mb-4">Fleet Dominance</p>
+            <h2 className="text-[54px] md:text-[80px] leading-[0.85] text-[#131B2E] font-[1000] tracking-tighter uppercase mb-8">
+              Advanced <br /> 
+              <span className="text-[#00B4D8]">Lifting</span> <br /> 
+              Units
             </h2>
 
-            <h3 className="mt-8 text-xl font-bold text-slate-700 flex items-center gap-3">
-              <span className="w-10 h-[2px] bg-cyan-500"></span>
-              Secure system to minimize risks
-            </h3>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="w-16 h-[4px] bg-[#00B4D8]"></span>
+              <h3 className="text-2xl font-black text-[#131B2E] uppercase tracking-tight">
+                Engineering Safety
+              </h3>
+            </div>
 
-            <p className="mt-6 text-gray-600 leading-relaxed max-w-xl font-medium text-lg">
-              Pune Logitech delivers high-performance lifting solutions designed 
-              for safety, efficiency, and precision. Our advanced equipment ensures 
-              smooth operations, better reach, and enhanced productivity.
+            <p className="text-slate-500 leading-relaxed max-w-lg font-medium text-lg mb-8">
+              Pune Logitech provides massive-scale access solutions. Our engineering-first 
+              approach ensures smooth operations in the most challenging environments.
             </p>
           </motion.div>
-
         </div>
 
-        {/* 🔥 BOTTOM VISUAL SECTION */}
-        <div className="relative mt-32">
-
-          {/* ANIMATED BACKGROUND TECH CIRCLES */}
-          <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-            <motion.div 
-              animate={{ rotate: 360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="w-[600px] h-[600px] border border-dashed border-cyan-300/40 rounded-full"
-            />
-          </div>
-
-          {/* MAIN IMAGE WITH PERMANENT CALLOUT CARDS */}
-          <motion.div className="relative z-10 mx-auto w-fit">
-            <motion.img
-              src="/images/about/img2.png"
-              className="w-[550px] object-contain drop-shadow-2xl"
-              initial={{ y: 80, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
+        {/* 🔥 SECOND IMAGE SECTION */}
+        <div className="flex justify-center lg:justify-end -mt-48 md:-mt-80 lg:pr-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative w-full max-w-[450px] lg:max-w-[500px]"
+          >
+            <img
+              src="/images/about/img1.png"
+              className="w-full object-contain drop-shadow-2xl z-10"
+              alt="Technical Detail"
             />
 
-            {/* 🏷️ SPEC CARD: BRAKES */}
+            {/* Spec Cards - Image 2 */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }} 
-              whileInView={{ opacity: 1, scale: 1 }} 
-              transition={{ delay: 1 }}
-              className="absolute top-[10%] -left-20 bg-white/95 p-4 rounded-xl shadow-xl border border-slate-100 max-w-[180px]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              className="absolute top-[5%] -left-12 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl border border-slate-100 max-w-[180px] z-20"
             >
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                <span className="text-[10px] font-black uppercase text-orange-600">Elevation Safety</span>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2.5 h-2.5 bg-[#00B4D8] rounded-full shadow-[0_0_8px_#00B4D8]" />
+                <span className="text-[10px] font-black uppercase text-[#0077B6]">Auto-Brake</span>
               </div>
-              <p className="text-[11px] font-bold text-slate-800 leading-tight">
-                Auto-lock brakes engage instantly upon elevation
+              <p className="text-[12px] font-extrabold text-[#131B2E] leading-tight">
+                Locks engage instantly upon lift activation.
               </p>
             </motion.div>
 
-            {/* 🏷️ SPEC CARD: PROTECTION */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }} 
-              whileInView={{ opacity: 1, scale: 1 }} 
-              transition={{ delay: 1.2 }}
-              className="absolute bottom-[40%] -right-20 bg-white/95 p-4 rounded-xl shadow-xl border border-slate-100 max-w-[180px]"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="absolute top-[40%] -right-10 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl border border-slate-100 max-w-[180px] z-20"
             >
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-2 h-2 bg-cyan-500 rounded-full" />
-                <span className="text-[10px] font-black uppercase text-cyan-600">Operator Shield</span>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-[0_0_8px_#3b82f6]" />
+                <span className="text-[10px] font-black uppercase text-blue-600">Stability</span>
               </div>
-              <p className="text-[11px] font-bold text-slate-800 leading-tight">
-                Vertical rails for enhanced operator protection
+              <p className="text-[12px] font-extrabold text-[#131B2E] leading-tight">
+                Vertical rails for enhanced operator protection.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-[#131B2E] p-6 rounded-2xl shadow-2xl min-w-[320px] z-20 border-b-4 border-[#00B4D8]"
+            >
+              <p className="text-[10px] font-black text-[#00B4D8] uppercase tracking-widest mb-1 text-center">Maneuverability</p>
+              <p className="text-[13px] font-bold text-white leading-tight text-center">
+                Improved easy-lock casters and precision swivel system.
               </p>
             </motion.div>
           </motion.div>
-
-          {/* 🔥 FLOATING FEATURE CARDS */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="absolute left-[0%] top-[40%] bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white"
-          >
-            <div className="bg-cyan-100 p-2 rounded-lg text-cyan-600 text-xs font-bold italic">SPEC</div>
-            <p className="text-sm font-bold text-slate-800 uppercase tracking-tight">360-degree access</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6 }}
-            className="absolute right-[-2%] top-[10%] max-w-[220px] bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white"
-          >
-            <div className="bg-orange-100 p-2 rounded-lg text-orange-600 text-xs font-bold italic">SAFE</div>
-            <p className="text-[11px] font-bold text-slate-800 uppercase leading-tight">Secure system to minimize risks</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8 }}
-            className="absolute right-[5%] bottom-[-10%] max-w-[280px] bg-slate-900 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700"
-          >
-            <div className="bg-cyan-500/20 p-2 rounded-lg text-cyan-400 text-xs font-bold italic">MOVE</div>
-            <p className="text-[11px] font-bold text-white uppercase leading-tight">
-              Improved easy-lock casters & better swivel
-            </p>
-          </motion.div>
-
         </div>
 
       </div>
 
-      {/* 🔥 BACKGROUND BIG TEXT */}
+      {/* 🔥 MASSIVE BACKGROUND DECORATION */}
       <motion.div 
-        initial={{ x: -100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute bottom-10 left-10 text-[140px] font-black text-cyan-50/50 pointer-events-none select-none z-0 tracking-tighter"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.03 }}
+        transition={{ duration: 2 }}
+        className="absolute bottom-[-5%] right-[-5%] pointer-events-none select-none z-0"
       >
-        1230P
+        <h1 className="text-[280px] font-[1000] text-[#131B2E] tracking-tighter leading-none">
+          PUNE
+        </h1>
       </motion.div>
-
-     
 
     </section>
   );

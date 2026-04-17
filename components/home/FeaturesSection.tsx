@@ -25,6 +25,15 @@ export default function FeatureSection() {
             backgroundSize: '40px 40px' 
           }} 
         />
+        
+        {/* ✨ DUAL-SIDE DATA STREAM LINES (ANIMATION REMOVED) */}
+        <div className="absolute inset-y-0 left-4 md:left-12 w-[1.5px] bg-gradient-to-b from-transparent via-cyan-600/40 to-transparent" />
+        <div className="absolute inset-y-0 right-4 md:right-12 w-[1.5px] bg-gradient-to-b from-transparent via-cyan-600/40 to-transparent" />
+
+        {/* VERTICAL SCANNER LINE (ANIMATION REMOVED - NOW STATIC AT TOP) */}
+        <div 
+          className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent z-10"
+        />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
@@ -37,14 +46,13 @@ export default function FeatureSection() {
           variants={staggerContainer}
           className="grid lg:grid-cols-12 gap-6 items-center"
         >
-          {/* LEFT IMAGE: MASSIVE BOOMLIFT - Size Improved */}
+          {/* LEFT IMAGE: MASSIVE BOOMLIFT */}
           <motion.div variants={fadeInUp} className="lg:col-span-6 relative group flex justify-center">
             <div className="absolute inset-0 bg-cyan-100/40 rounded-full blur-[120px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
             
             <div className="relative w-full">
               <img
                 src="/images/feature/boomlift.png"
-                // Increased max-width from 550px to 650px and scale from 125 to 135
                 className="w-full h-auto object-contain max-w-[650px] mx-auto drop-shadow-[0_50px_50px_rgba(0,0,0,0.12)] z-10 relative scale-110 md:scale-[1.35]"
                 alt="boom lift"
               />
@@ -111,11 +119,49 @@ export default function FeatureSection() {
 
         {/* 🔥 MIDDLE VISUAL: THE GIANT CRANE */}
         <div className="relative mt-16 md:mt-24 flex justify-center">
+          
+          {/* ✨ HUD CONNECTOR LINES (ANIMATIONS REMOVED - STATIC PATHS) */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block filter drop-shadow-[0_2px_4px_rgba(6,182,212,0.1)]">
+            {/* Left Side Connectors */}
+            <path
+              d="M 100 200 L 250 200 L 320 280"
+              fill="none"
+              stroke="rgba(6, 182, 212, 0.35)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 100 500 L 200 500 L 250 450"
+              fill="none"
+              stroke="rgba(6, 182, 212, 0.35)"
+              strokeWidth="1.5"
+            />
+            
+            {/* Right Side Connectors */}
+            <path
+              d="M 1300 150 L 1150 150 L 1080 220"
+              fill="none"
+              stroke="rgba(6, 182, 212, 0.35)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 1300 600 L 1200 600 L 1100 500"
+              fill="none"
+              stroke="rgba(6, 182, 212, 0.35)"
+              strokeWidth="1.5"
+            />
+          </svg>
+
           <div className="absolute inset-0 flex justify-center items-center pointer-events-none scale-150">
+            {/* RADIAL PULSE FOR VISIBILITY */}
+            <motion.div 
+              animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute w-[600px] h-[600px] bg-cyan-200 rounded-full blur-[100px]"
+            />
             <motion.div 
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="w-[800px] h-[800px] border border-dashed border-cyan-200 rounded-full opacity-20" 
+              className="w-[800px] h-[800px] border border-dashed border-cyan-300 rounded-full opacity-30" 
             />
           </div>
 
@@ -202,9 +248,9 @@ export default function FeatureSection() {
           className="mt-20 md:mt-32 grid grid-cols-1 md:grid-cols-3 gap-6 relative z-20"
         >
           {/* Spec Card 1 */}
-          <motion.div variants={fadeInUp} className="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-500">
+          <motion.div variants={fadeInUp} className="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-500 group">
             <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-cyan-50 rounded-2xl text-cyan-600">
+              <div className="p-3 bg-cyan-50 rounded-2xl text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-colors duration-300">
                 <ArrowUpRight size={28} />
               </div>
               <span className="text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em]">Vertical limit</span>
@@ -217,9 +263,9 @@ export default function FeatureSection() {
           </motion.div>
 
           {/* Spec Card 2 */}
-          <motion.div variants={fadeInUp} className="bg-[#0F172A] p-8 rounded-3xl shadow-2xl">
+          <motion.div variants={fadeInUp} className="bg-[#0F172A] p-8 rounded-3xl shadow-2xl border border-slate-800">
             <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-slate-800 rounded-2xl text-white">
+              <div className="p-3 bg-slate-800 rounded-2xl text-white group-hover:bg-cyan-500 transition-colors duration-300">
                 <Weight size={28} />
               </div>
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Max payload</span>
@@ -232,9 +278,9 @@ export default function FeatureSection() {
           </motion.div>
 
           {/* Spec Card 3 */}
-          <motion.div variants={fadeInUp} className="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-500">
+          <motion.div variants={fadeInUp} className="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-500 group">
             <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-cyan-50 rounded-2xl text-cyan-600">
+              <div className="p-3 bg-cyan-50 rounded-2xl text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-colors duration-300">
                 <Zap size={28} />
               </div>
               <span className="text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em]">Efficiency</span>

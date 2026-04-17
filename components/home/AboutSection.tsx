@@ -18,10 +18,10 @@ export default function AboutSection() {
   return (
     <section className="relative pt-12 pb-24 bg-[#F8FAFC] overflow-hidden font-sans">
       
-      {/* 🧩 ENHANCED DYNAMIC BACKGROUND: LAYERED CIRCLES & BLUISH EFFECTS */}
+      {/* 🧩 ENHANCED DYNAMIC BACKGROUND: CENTRALIZED NESTED CIRCLES */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         
-        {/* --- NEW: THEMATIC BLUISH GRADIENTS --- */}
+        {/* THEMATIC BLUISH GRADIENTS */}
         <div 
           className="absolute inset-0 opacity-40"
           style={{
@@ -34,41 +34,31 @@ export default function AboutSection() {
         <div className="absolute top-1/4 -right-20 w-96 h-96 bg-cyan-200/30 blur-[100px] rounded-full" />
         <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-blue-100/40 blur-[120px] rounded-full" />
 
-        <div className="flex items-center justify-center h-full w-full">
-          {/* Primary Circles */}
-          {[...Array(12)].map((_, i) => (
+        {/* --- CENTRALIZED NESTED CIRCLES (BIG TO SMALL) - REDUCED SIZE --- */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center">
+          {/* Sizes reduced: 1400->1100, 1100->850, 800->650, 500->450, 250->250 */}
+          {[1100, 850, 650, 450, 250].map((size, i) => (
             <motion.div
-              key={`primary-${i}`}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 0.05, scale: 1 }}
-              transition={{ duration: 1.5, delay: i * 0.08 }}
-              className="absolute border border-cyan-400 rounded-full"
-              style={{
-                width: `${(i + 1) * 320}px`,
-                height: `${(i + 1) * 320}px`,
-              }}
-            />
-          ))}
-
-          {/* Secondary Decorative Accent Circles */}
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={`accent-${i}`}
-              animate={{ 
-                scale: [1, 1.1, 1],
-                opacity: [0.02, 0.04, 0.02] 
-              }}
+              key={`nested-circle-${i}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               transition={{ 
-                duration: 8, 
-                repeat: Infinity, 
-                delay: i * 2 
+                duration: 1.5, 
+                delay: i * 0.1,
+                ease: "easeOut" 
               }}
-              className="absolute border-[2px] border-blue-200 rounded-full"
+              className="absolute border-[2px] border-cyan-600/30 rounded-full shadow-[0_0_50px_rgba(8,145,178,0.1)]"
               style={{
-                width: `${(i + 1) * 600}px`,
-                height: `${(i + 1) * 600}px`,
+                width: `${size}px`,
+                height: `${size}px`,
               }}
-            />
+            >
+              <motion.div 
+                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
+                className="w-full h-full rounded-full border border-blue-500/20"
+              />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -130,7 +120,7 @@ export default function AboutSection() {
             </motion.div>
           </motion.div>
 
-          {/* TEXT INFORMATION - Shifted Right (using lg:pl-16) */}
+          {/* TEXT INFORMATION */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}

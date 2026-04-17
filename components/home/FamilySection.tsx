@@ -14,7 +14,6 @@ export default function FamilySection() {
   };
 
   return (
-    // ⬇️ REDUCED VERTICAL PADDING FROM py-32 md:py-48 TO pt-16 pb-24 md:pt-24 md:pb-32
     <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 bg-[#F8FAFC] overflow-hidden">
       
       {/* 🧩 TECHNICAL BACKGROUND OVERLAY */}
@@ -26,6 +25,60 @@ export default function FamilySection() {
             backgroundSize: '60px 60px' 
           }} 
         />
+        
+        {/* ✨ ENHANCED: MORE COMPLEX ANIMATED TECHNICAL LINES */}
+        <svg className="absolute inset-0 w-full h-full opacity-30">
+          {/* Top Left Path */}
+          <motion.path
+            d="M -50 150 L 300 150 L 350 200 L 350 450 L 400 450"
+            fill="transparent"
+            stroke="#06b6d4"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
+          />
+          
+          {/* Middle Right Path */}
+          <motion.path
+            d="M 1500 400 L 1200 400 L 1150 350 L 1150 150 L 1050 150"
+            fill="transparent"
+            stroke="#06b6d4"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2.5, delay: 0.3, ease: "easeInOut" }}
+          />
+
+          {/* Bottom Center Complex Path */}
+          <motion.path
+            d="M 600 1000 L 600 850 L 650 800 L 950 800 L 1000 750 L 1000 550"
+            fill="transparent"
+            stroke="#06b6d4"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 3, delay: 0.6, ease: "easeInOut" }}
+          />
+
+          {/* Decorative Terminal Dots for added visibility */}
+          {[
+            { cx: 400, cy: 450, delay: 2.5 },
+            { cx: 1050, cy: 150, delay: 2.8 },
+            { cx: 1000, cy: 550, delay: 3.6 },
+            { cx: 350, cy: 200, delay: 1.5 },
+          ].map((dot, i) => (
+            <motion.circle 
+              key={i}
+              cx={dot.cx} cy={dot.cy} r="3.5" 
+              fill="#06b6d4" 
+              initial={{ opacity: 0, scale: 0 }} 
+              whileInView={{ opacity: 1, scale: 1 }} 
+              transition={{ delay: dot.delay, duration: 0.4 }}
+            />
+          ))}
+        </svg>
+
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-cyan-50/40 to-transparent" />
       </div>
 
@@ -52,7 +105,7 @@ export default function FamilySection() {
               EXPANDING <br />
               <span className="text-cyan-500">POWER.</span> <br />
               DEFINING <br />
-              REACH.
+              Reach.
             </motion.h2>
 
             <motion.p variants={fadeInUp} className="text-gray-500 leading-relaxed max-w-xl text-lg md:text-xl font-medium mb-12">

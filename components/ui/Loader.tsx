@@ -99,7 +99,7 @@ export default function CraneLoader() {
             <motion.img
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              src="/images/hero/loader1.png"
+              src="/images/hero/loader3.png"
               className="w-[600px] object-contain relative z-10 drop-shadow-[0_35px_50px_rgba(15,23,42,0.2)]"
               alt="crane"
             />

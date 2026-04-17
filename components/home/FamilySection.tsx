@@ -90,7 +90,7 @@ export default function FamilySection() {
               
               <div className="p-10 pt-20 overflow-visible flex flex-col items-center">
                 <motion.img
-                  src="/images/family/farana.png"
+                  src="/images/family/farana1.png"
                   alt="Farana Crane"
                   className="w-full h-auto max-w-[800px] mx-auto relative z-10 drop-shadow-[0_45px_50px_rgba(0,0,0,0.15)] scale-[1.6] group-hover:scale-[1.75] transition-transform duration-700 ease-out"
                 />
